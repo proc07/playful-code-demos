@@ -1,0 +1,26 @@
+<script>
+  async function asy1() {
+    console.log(1)
+    await asy2() // = Promise.resolve(undefined) 把asy2推送到微队列
+    console.log(2)
+  }
+  asy2 = async () => {
+    await setTimeout(() => {
+      Promise.resolve().then((_) => {
+        console.log(3)
+      })
+      console.log(4)
+    }, 0)
+    console.log('asy2')
+  }
+  asy3 = async () => {
+    Promise.resolve().then(_ => {
+      console.log(6)
+    })
+  }
+
+  asy1()
+  console.log(7)
+  asy3()
+  // 1 7 asy2 6 2 4 3 
+</script>

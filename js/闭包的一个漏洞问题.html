@@ -1,0 +1,21 @@
+<script>
+  var o = (function () {
+    var obj = {
+      a: 1,
+      b: 2,
+    }
+
+    return {
+      get(k) {
+        return obj[k]
+      }
+    }
+  })()
+  Object.defineProperty(Object.prototype, 'getObj', {
+    get() {
+      return this
+    }
+  })
+  console.log(o.get('getObj'))
+  o.get('getObj').c = 333
+</script>
